@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // Paths
 import Home from './pages/Home.js'
-import About from "./pages/About.js";
+import Single from "./pages/Single.js";
 import NotFound from "./pages/NotFound.js";
 
 // Web3
@@ -20,7 +20,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home/>}/>
               <Route path="/home" element={<Home/>}/>
-              <Route path="/about" element={<About/>}/>
+              <Route path="/single" element={<Single/>}/>
               <Route path="*" element={<NotFound/>}/>
           </Routes>
         </BrowserRouter>
