@@ -1,6 +1,9 @@
+import { useEffect, useState } from 'react';
 import '../Home.css';
 
-const Home = ({connectWallet, haveMetamask}) => {
+const Home = ({connectWallet, haveMetamask, isConnected, address, networkType, balance, getData}) => {
+    const [currValue, setCurrValue] = useState(0);
+
     const cards = [
         {
             id: 1,
@@ -16,11 +19,24 @@ const Home = ({connectWallet, haveMetamask}) => {
         },
     ];
 
+    useEffect(() => {
+        console.log(address);
+        console.log(networkType);
+        console.log(balance);
+        getCurrentValue();
+    }, [isConnected])
+
+    const getCurrentValue = async () => { 
+        const ans = await getData();
+        setCurrValue(ans);
+    }
+
     return (
         <header className="App-header">
             <h1>Home</h1>
             <button>Connect Wallet</button>
             <button>Create Project</button>
+            <p>{currValue}</p>
             {cards.map((card, i) => {
                 return <p key={i}>{card.name}</p>
             })}
