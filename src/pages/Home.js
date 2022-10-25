@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import '../Home.css';
 import DonateCard from '../components/DonateCard.js';
+import Modal from 'react-modal';
 
 const Home = ({connectWallet, haveMetamask, isConnected, address, networkType, balance, getData, storeData}) => {
     const [currValue, setCurrValue] = useState(0);
+    const [modalIsOpen, setIsOpen] = useState(false);
 
     const cards = [
         {
@@ -39,8 +41,13 @@ const Home = ({connectWallet, haveMetamask, isConnected, address, networkType, b
     }
 
     const StartFund = () => {
+        setIsOpen(true);
         console.log("Start Fund");
-        storeData(20);
+        //storeData(20);
+    }
+
+    const closeModal = () => {
+        setIsOpen(false);
     }
 
     return (
@@ -78,6 +85,17 @@ const Home = ({connectWallet, haveMetamask, isConnected, address, networkType, b
             :
             <p style={{color: "red"}} onClick={connectWallet}>Wallet Not Connected</p>
             }
+
+            <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+                ariaHideApp={false}
+                contentLabel="Example Modal"
+            >
+                <p>abc</p>
+                <p>abc</p>
+                <p>abc</p>
+            </Modal>
         </div>
     );
 }
