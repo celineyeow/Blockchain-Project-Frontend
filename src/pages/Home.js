@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import '../Home.css';
+import DonateCard from '../components/DonateCard.js';
 
-const Home = ({connectWallet, haveMetamask, isConnected, address, networkType, balance, getData}) => {
+const Home = ({connectWallet, haveMetamask, isConnected, address, networkType, balance, getData, storeData}) => {
     const [currValue, setCurrValue] = useState(0);
 
     const cards = [
@@ -20,6 +21,12 @@ const Home = ({connectWallet, haveMetamask, isConnected, address, networkType, b
     ];
 
     useEffect(() => {
+        if(haveMetamask && !isConnected){
+            connectWallet();
+        }
+    }, [haveMetamask])
+
+    useEffect(() => {
         console.log(address);
         console.log(networkType);
         console.log(balance);
@@ -31,43 +38,47 @@ const Home = ({connectWallet, haveMetamask, isConnected, address, networkType, b
         setCurrValue(ans);
     }
 
+    const StartFund = () => {
+        console.log("Start Fund");
+        storeData(20);
+    }
+
     return (
-        <header className="App-header">
-            <h1>Home</h1>
-            <button>Connect Wallet</button>
-            <button>Create Project</button>
+        <div className="theme">
+            <div className="header-comp">
+                <div className="fund-me">
+                    <h2>Fundme</h2>
+                </div>
+                <div className="start-fund">
+                    <button className="start-fund-button" onClick={StartFund}>
+                        Start a Fundraiser
+                    </button>
+                </div>
+            </div>
+            
+            <h1>Fundraiser</h1>
+
             <p>{currValue}</p>
-            {cards.map((card, i) => {
-                return <p key={i}>{card.name}</p>
-            })}
-             {
-                haveMetamask ?
-                <div>
-                    <p>
-                        Please log in with&nbsp;
-                        <span className = "login-highlight">
-                            METAMASK 
-                        </span>
-                        &nbsp;to proceed. 
-                    </p>
-                    <a className = "global-link" onClick = {connectWallet}>
-                        Click here to connect
-                    </a>
-                </div>
-                :
-                <div>
-                    <p>
-                        No MetaMask detected. 
-                        <br></br>
-                        Please install&nbsp;
-                        <span className = "login-highlight">
-                            METAMASK 
-                        </span>
-                        &nbsp;to your browser to proceed. 
-                    </p>
-                </div>
+            <div style={{display: "flex", gap: "20px", textAlign: "left"}}>
+                {cards.map((card, i) => {
+                    return(
+                        <div style={{width: "33%"}} key={i}>
+                            <DonateCard
+                                location="Singapore"
+                                title={card.name}
+                                description="Help support the quality of.."
+                            />
+                        </div>
+                    )
+                })}
+            </div>
+
+            {isConnected ? 
+            <p style={{color: "green"}}>Wallet Connected: {address}</p>
+            :
+            <p style={{color: "red"}} onClick={connectWallet}>Wallet Not Connected</p>
             }
-        </header>
+        </div>
     );
 }
 

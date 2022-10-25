@@ -85,6 +85,7 @@ const App = () => {
                         networkType = {network} 
                         balance = {balance}
                         getData={getData}
+                        storeData={storeData}
                     />
                 }/>
               <Route path="/home" element={<Home connectWallet={connectWallet}  haveMetamask={haveMetamask} />}/>
