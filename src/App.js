@@ -5,12 +5,15 @@ import {ethers} from 'ethers';
 
 // Paths
 import Home from './pages/Home.js'
-import Single from "./pages/Single.js";
+import Donate from "./pages/Donate.js";
 import NotFound from "./pages/NotFound.js";
 
 // Web3
 import Web3 from 'web3';
 import { CONTRACT_ABI, CONTRACT_ADDRESS } from "./contracts/config";
+
+// css
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
     const [haveMetamask, setHaveMetamask] = useState(true);     // check if the browser has MetaMask installed. 
@@ -89,7 +92,7 @@ const App = () => {
                     />
                 }/>
               <Route path="/home" element={<Home connectWallet={connectWallet}  haveMetamask={haveMetamask} />}/>
-              <Route path="/single" element={<Single/>}/>
+              <Route path="/donate" element={<Donate/>}/>
               <Route path="*" element={<NotFound/>}/>
           </Routes>
         </BrowserRouter>

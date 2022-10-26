@@ -1,0 +1,54 @@
+.donate-background{
+    text-align: center;
+    background-color: var(--BackgroundUncovered);
+    min-height: 100vh;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.donate{
+    text-align: center;
+    background-color: var(--BackgroundUncovered);
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.donate-intro{
+    width: 65%;
+    height: 100%;
+    font-size: 20px;
+    text-align: left;
+    padding-right: 10px;
+    color: var(--MessageColorUncovered);
+}
+
+.donate-vertLine{
+    height: 100%;
+    width: 1px;
+    background-color: var(--BackgroundCovered);
+}
+
+.donate-box{
+    height: 100%;
+    flex-direction: column;
+    text-align: left;
+    font-size: 20px;
+    padding-left: 20px;
+    color: var(--MessageColorUncovered);
+}
+
+.donate-storeBox{
+    text-align: left;
+    font-size: 15px;
+    color: var(--KeyMessageColor);
+}
+
+.donate-getBox{
+    text-align: left;
+    font-size: 15px;
+    color: var(--MessageColorUncovered);
+}

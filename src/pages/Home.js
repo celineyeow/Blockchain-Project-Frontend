@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import '../Home.css';
 import DonateCard from '../components/DonateCard.js';
 import Modal from 'react-modal';
+import Fundraisers from '../components/Fundtaisers';
 
 const Home = ({connectWallet, haveMetamask, isConnected, address, networkType, balance, getData, storeData}) => {
     const [currValue, setCurrValue] = useState(0);
@@ -70,11 +71,12 @@ const Home = ({connectWallet, haveMetamask, isConnected, address, networkType, b
                 {cards.map((card, i) => {
                     return(
                         <div style={{width: "33%"}} key={i}>
-                            <DonateCard
+                            {/*<DonateCard
                                 location="Singapore"
                                 title={card.name}
                                 description="Help support the quality of.."
-                            />
+                            />*/}
+                            <Fundraisers/>
                         </div>
                     )
                 })}
@@ -83,7 +85,7 @@ const Home = ({connectWallet, haveMetamask, isConnected, address, networkType, b
             {isConnected ? 
             <p style={{color: "green"}}>Wallet Connected: {address}</p>
             :
-            <p style={{color: "red"}} onClick={connectWallet}>Wallet Not Connected</p>
+            <a style={{color: "red"}} onClick={connectWallet}>Wallet Not Connected</a>
             }
 
             <Modal
