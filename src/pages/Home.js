@@ -38,7 +38,6 @@ const Home = ({connectWallet, haveMetamask, isConnected, address, networkType, b
 
     const createProject = async (e)=> {
         e.preventDefault();
-        console.log(e.target);
         await contract.methods.createNewProject(e.target[0].value, e.target[1].value, e.target[2].value, e.target[3].value, e.target[4].value).send({from: address});
         console.log("Project Created");
     }
@@ -64,7 +63,7 @@ const Home = ({connectWallet, haveMetamask, isConnected, address, networkType, b
                 {[...Array(parseInt(projectLen)+1)].map((_, i) => {
                     return(
                         <div style={{width: "30%"}} key={i}>
-                            <Fundraisers  i={i} contract={contract}/>
+                            <Fundraisers  i={i} contract={contract} address={address}/>
                         </div>
                     )
                 })}

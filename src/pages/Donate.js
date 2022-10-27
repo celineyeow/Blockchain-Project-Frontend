@@ -1,19 +1,24 @@
 import { useState } from "react";
 
 import "./donate.css";
+
+// Custom Components
 import ProgressBar from "../components/ProgressBar";
 
+// Components
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
-export default function Donate(props){
+const Donate = ({address, id, contract, name, description, currAmount, goalAmount, timeLeft}) =>{
     const [completed, setCompleted] = useState(100, 100);
 
     const FunctionIntro = () => {
         return (
             <div className = "donate-intro">
                 <p>
-                    &emsp;*Insert project name here*
+                    {name}
                     <br/>
-                    &emsp;*Insert project description here*
+                    {description}
                     <br/>
                     Progress Bar
                 </p>
@@ -21,53 +26,29 @@ export default function Donate(props){
         )
     }
 
-    const DonateValPanel = () => {
-        return (
-            <div>
-                Please enter your donation amount:
-                <br />
-                <input width = "30px" type = "number" id = "inputVal"></input>
-                <br />
-                <div className = "donate-storeBox">
-                    <button className = "btn" onClick = {props.storeValHandle}>
-                        Donate
-                    </button>
-                    {
-                        props.storedPending ?
-                        <span>
-                            {
-                                props.storedDone ?
-                                <span>Done! </span>:
-                                 <span>Pending... </span>
-                            }
-                        </span> : 
-                        <span>
-                            {
-                                props.storedDone ?
-                                <span>Rejected! </span>:
-                                <span>Please try again. </span>
-                            }
-                        </span>
-                    }
-                </div>
-            </div>
-        )
+    const Donate = async (e) => {
+        e.preventDefault();
+        console.log(e.target[0].value);
+        await contract.methods.donate(id).send({from: address, value: e.target[0].value});
     }
 
-   // const GetValPanel = () => {
-    //    return (
-    //        <div>
-    //            Click 'get' to check the stored value:&nbsp;
-    //            <span className = "global-message">
-    //                {props.showVal}
-    //            </span>
-    //            <br />
-    //            <button className = "btn" onClick = {props.showValHandle}>
-    //                get
-    //            </button>
-    //        </div>
-    //    )
-    //}
+    const OwnerTransfer = async () => {
+        await contract.methods.transferOut(id).send({from: address});
+    }
+
+    const DonateValPanel = () => {
+        return (
+            <Form onSubmit={Donate}>
+                <Form.Group className="mb-3" controlId="formBasicAmount">
+                    <Form.Label>Enter Donation Amount</Form.Label>
+                    <Form.Control placeholder="Enter amount" />
+                </Form.Group>
+                <Button variant="primary" type="submit">
+                    Donate
+                </Button>
+            </Form>
+        )
+    }
 
     const FunctionPanel = () => {
         return (
@@ -75,6 +56,8 @@ export default function Donate(props){
                 <DonateValPanel/>
                 <br/>
                 <ProgressBar bgcolor={"#6a1b9a"} completed={completed} />
+                <br/>
+                <Button onClick={OwnerTransfer}>{"Transfer Out (Project Owner)"}</Button>
             </div>
         )
     }
@@ -92,3 +75,5 @@ export default function Donate(props){
         </div>
     )
 }
+
+export default Donate;

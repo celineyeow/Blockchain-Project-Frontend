@@ -7,7 +7,7 @@ import Donate from '../pages/Donate.js';
 import Modal from 'react-modal';
 //import './fundraisers.css';
 
-const Fundraisers = ({i, contract}) => {
+const Fundraisers = ({i, contract, address}) => {
     const [currProject, setCurrProject] = useState(null);
 
     //Project Details
@@ -66,7 +66,16 @@ const Fundraisers = ({i, contract}) => {
             ariaHideApp={false}
             contentLabel="Example Modal"
         >
-            <Donate/>
+            <Donate
+                address={address}
+                id={i}
+                name={name}
+                description={description}
+                currAmount={currAmount}
+                goalAmount={goalAmount}
+                timeLeft={timeLeft}
+                contract={contract}
+            />
         </Modal>
     </div>
     
