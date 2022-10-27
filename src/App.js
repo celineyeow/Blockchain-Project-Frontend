@@ -87,8 +87,7 @@ const App = () => {
                         address = {address} 
                         networkType = {network} 
                         balance = {balance}
-                        getData={getData}
-                        storeData={storeData}
+                        contract={contract}
                     />
                 }/>
               <Route path="/home" element={<Home connectWallet={connectWallet}  haveMetamask={haveMetamask} />}/>

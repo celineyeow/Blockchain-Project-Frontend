@@ -1,27 +1,13 @@
 import { useEffect, useState } from 'react';
-import '../Home.css';
+import './Home.css';
 import DonateCard from '../components/DonateCard.js';
 import Modal from 'react-modal';
 import Fundraisers from '../components/Fundtaisers';
 
-const Home = ({connectWallet, haveMetamask, isConnected, address, networkType, balance, getData, storeData}) => {
+const Home = ({connectWallet, haveMetamask, isConnected, address, networkType, balance, contract}) => {
     const [currValue, setCurrValue] = useState(0);
     const [modalIsOpen, setIsOpen] = useState(false);
-
-    const cards = [
-        {
-            id: 1,
-            name: "Cat"
-        },
-        {
-            id: 2,
-            name: "Dog",
-        },
-        {
-            id: 3,
-            name: "Bat",
-        },
-    ];
+    const [projectLen, setProjectLen] = useState(0);
 
     useEffect(() => {
         if(haveMetamask && !isConnected){
@@ -30,21 +16,18 @@ const Home = ({connectWallet, haveMetamask, isConnected, address, networkType, b
     }, [haveMetamask])
 
     useEffect(() => {
-        console.log(address);
-        console.log(networkType);
-        console.log(balance);
-        getCurrentValue();
-    }, [isConnected])
+        getProjectLen();
+    }, []);
 
-    const getCurrentValue = async () => { 
-        const ans = await getData();
-        setCurrValue(ans);
+    const getProjectLen = async () => { 
+        const res = await contract.methods.getLastUsedProjectId().call();
+        setProjectLen(res+1);
+        console.log(projectLen);
     }
 
     const StartFund = () => {
         setIsOpen(true);
         console.log("Start Fund");
-        //storeData(20);
     }
 
     const closeModal = () => {
@@ -63,20 +46,14 @@ const Home = ({connectWallet, haveMetamask, isConnected, address, networkType, b
                     </button>
                 </div>
             </div>
-            
+
             <h1>Fundraiser</h1>
 
-            <p>{currValue}</p>
-            <div style={{display: "flex", gap: "20px", textAlign: "left"}}>
-                {cards.map((card, i) => {
+            <div style={{display: "flex", gap: "20px", textAlign: "left", flexWrap: "wrap"}}>
+                {[...Array(projectLen)].map((_, i) => {
                     return(
-                        <div style={{width: "33%"}} key={i}>
-                            {/*<DonateCard
-                                location="Singapore"
-                                title={card.name}
-                                description="Help support the quality of.."
-                            />*/}
-                            <Fundraisers/>
+                        <div style={{width: "30%"}} key={i}>
+                            <Fundraisers  i={i} contract={contract}/>
                         </div>
                     )
                 })}

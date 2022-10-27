@@ -1,14 +1,34 @@
-export const CONTRACT_ADDRESS = "0x469d00881151499890A09DD073d3d613bF21e591"
+export const CONTRACT_ADDRESS = "0x786ec5c7b5B918F5e76b4d99600501bf768C506B"
 export const CONTRACT_ABI = [
 	{
 		"inputs": [
 			{
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_description",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "_beneficiary",
+				"type": "address"
+			},
+			{
 				"internalType": "uint256",
-				"name": "_n",
+				"name": "_goalAmt",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_duration",
 				"type": "uint256"
 			}
 		],
-		"name": "setNP",
+		"name": "createNewProject",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -17,11 +37,11 @@ export const CONTRACT_ABI = [
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "_n",
+				"name": "_id",
 				"type": "uint256"
 			}
 		],
-		"name": "setP",
+		"name": "donate",
 		"outputs": [],
 		"stateMutability": "payable",
 		"type": "function"
@@ -30,21 +50,89 @@ export const CONTRACT_ABI = [
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "_p",
+				"name": "_id",
 				"type": "uint256"
 			}
 		],
+		"name": "getProjectDetails",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "int256",
+						"name": "id",
+						"type": "int256"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "description",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "beneficiary",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "goalAmt",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "currentAmt",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "timeLeft",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "claimed",
+						"type": "bool"
+					}
+				],
+				"internalType": "struct testContract.publicData",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "transferOut",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"stateMutability": "nonpayable",
 		"type": "constructor"
 	},
 	{
 		"inputs": [],
-		"name": "get",
+		"name": "getLastUsedProjectId",
 		"outputs": [
 			{
-				"internalType": "uint256",
+				"internalType": "int256",
 				"name": "",
-				"type": "uint256"
+				"type": "int256"
 			}
 		],
 		"stateMutability": "view",
