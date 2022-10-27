@@ -27,6 +27,7 @@ button {
   border-color: #fff;
   padding-inline: 25px;
   color: #fff;
+  border-radius: 10px;
 }
 
 h1{

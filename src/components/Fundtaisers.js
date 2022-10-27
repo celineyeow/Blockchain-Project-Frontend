@@ -1,9 +1,10 @@
-import { doesNotMatch } from "assert";
 import React from "react";
 import { useEffect, useState } from 'react';
 import { ProgressBar } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import Donate from '../pages/Donate.js';
+import Modal from 'react-modal';
 //import './fundraisers.css';
 
 const Fundraisers = ({i, contract}) => {
@@ -15,25 +16,28 @@ const Fundraisers = ({i, contract}) => {
     const [currAmount, setCurrAmount] = useState(0);
     const [goalAmount, setGoalAmount] = useState(0);
     const [timeLeft, setTimeLeft] = useState(0);
+    const [modalIsOpen, setIsOpen] = useState(false);
+
+    const closeModal = () => {
+        setIsOpen(false);
+    }
 
     const FundMePage = () => {
-        console.log("Move");
-        window.location.href = '/donate';
+        setIsOpen(true);
     }
 
     const getProject = async () => { 
-        const res = await contract.methods.getProjectDetails(2).call();
+        const res = await contract.methods.getProjectDetails(i).call();
         setCurrProject(res);
     }
 
     useEffect(() => {
-        console.log(i);
+        //console.log(i);
         getProject();
     }, []);
 
     useEffect(() => {
         if(currProject !== null){
-            console.log(currProject);
             setName(currProject.name);
             setDescription(currProject.description);
             setCurrAmount(currProject.currentAmt);
@@ -55,6 +59,15 @@ const Fundraisers = ({i, contract}) => {
                 <Button variant="primary" onClick={FundMePage}>Fund Me</Button>
             </Card.Body>
         </Card>}
+
+        <Modal
+            isOpen={modalIsOpen}
+            onRequestClose={closeModal}
+            ariaHideApp={false}
+            contentLabel="Example Modal"
+        >
+            <Donate/>
+        </Modal>
     </div>
     
 );

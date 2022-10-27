@@ -1,4 +1,3 @@
-import { Navigate } from "react-router-dom";
 import { useState } from "react";
 
 import "./donate.css";
@@ -6,8 +5,7 @@ import ProgressBar from "../components/ProgressBar";
 
 
 export default function Donate(props){
-    const [completed, setCompleted] = useState(0);
-    setInterval(() => setCompleted(Math.floor(Math.random() * 100) + 1), 7000);
+    const [completed, setCompleted] = useState(100, 100);
 
     const FunctionIntro = () => {
         return (
@@ -81,31 +79,16 @@ export default function Donate(props){
         )
     }
 
-    const StoragePage = () => {
-        return (
-            <div className = "donate-background">
-                <h1>Donation Page</h1>
-                <div className = "donate">
-                    <FunctionIntro/>
-                    <div className = "donate-vertLine">
-                        <p>&nbsp;<br/>&nbsp;<br/>&nbsp;<br/>&nbsp;<br/>&nbsp;<br/>&nbsp;</p>
-                    </div>
-                    <FunctionPanel/>
-                </div>
-
-                {/*<GlobalToolBar/>*/}
-            </div>
-        )
-    }
-
     return (
-        <div>
-            <StoragePage />
-            {/*
-                props.isConnected ?
-                <StoragePage />:
-                <Navigate to = '/InterfaceDemo' />
-             */}
+        <div className = "donate-background">
+            <h1>Donation Page</h1>
+            <div className = "donate">
+                <FunctionIntro/>
+                <div className = "donate-vertLine">
+                    <p>&nbsp;<br/>&nbsp;<br/>&nbsp;<br/>&nbsp;<br/>&nbsp;<br/>&nbsp;</p>
+                </div>
+                <FunctionPanel/>
+            </div>
         </div>
     )
 }

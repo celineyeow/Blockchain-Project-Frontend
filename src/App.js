@@ -78,7 +78,7 @@ const App = () => {
     <div className="App">
         <BrowserRouter>
             <Routes>
-              <Route path="/" 
+              <Route path="/*" 
                 element={
                     <Home 
                         connectWallet={connectWallet}
@@ -90,9 +90,6 @@ const App = () => {
                         contract={contract}
                     />
                 }/>
-              <Route path="/home" element={<Home connectWallet={connectWallet}  haveMetamask={haveMetamask} />}/>
-              <Route path="/donate" element={<Donate/>}/>
-              <Route path="*" element={<NotFound/>}/>
           </Routes>
         </BrowserRouter>
     </div>
