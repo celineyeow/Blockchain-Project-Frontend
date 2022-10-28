@@ -1,5 +1,10 @@
-export const CONTRACT_ADDRESS = "0x35d048454dc22f28bB2F17808335AEB92e6a5167"
+export const CONTRACT_ADDRESS = "0x6e0B3949258162166be84B8091a39f1Dd33dE370"
 export const CONTRACT_ABI = [
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
 	{
 		"inputs": [
 			{
@@ -29,7 +34,13 @@ export const CONTRACT_ABI = [
 			}
 		],
 		"name": "createNewProject",
-		"outputs": [],
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
@@ -44,6 +55,19 @@ export const CONTRACT_ABI = [
 		"name": "donate",
 		"outputs": [],
 		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getLastUsedProjectId",
+		"outputs": [
+			{
+				"internalType": "int256",
+				"name": "",
+				"type": "int256"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -118,24 +142,6 @@ export const CONTRACT_ABI = [
 		"name": "transferOut",
 		"outputs": [],
 		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	},
-	{
-		"inputs": [],
-		"name": "getLastUsedProjectId",
-		"outputs": [
-			{
-				"internalType": "int256",
-				"name": "",
-				"type": "int256"
-			}
-		],
-		"stateMutability": "view",
 		"type": "function"
 	}
 ]
