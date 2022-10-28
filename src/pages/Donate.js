@@ -29,7 +29,7 @@ const Donate = ({address, id, contract, name, description, currAmount, goalAmoun
     const Donate = async (e) => {
         e.preventDefault();
         console.log(e.target[0].value);
-        await contract.methods.donate(id).send({from: address, value: e.target[0].value});
+        await contract.methods.donate(id).send({from: address, value: e.target[0].value*10**18});
     }
 
     const OwnerTransfer = async () => {
