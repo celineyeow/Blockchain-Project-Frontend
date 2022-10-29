@@ -116,16 +116,16 @@ const Home = ({connectWallet, haveMetamask, isConnected, address, networkType, b
                     <div className="container">
                         <div className="row row-cols-lg-10">
                             <div className="col">
-                                <span className="badge text-bg-success">Active</span>
+                                <span style={{fontStyle: "oblique"}} className="badge text-bg-success">Active</span>
                                 <Card.Text style={{marginTop: "0.5rem"}}>Project is active</Card.Text>
                             </div>
                             <div className="col">
-                                <span className="badge bg-warning text-dark">Unclaimed</span>
-                                <Card.Text style={{marginTop: "0.5rem"}}>Project ended but fund has not been claimed by initiator</Card.Text>
+                                <span style={{fontStyle: "oblique"}} className="badge bg-warning text-dark">Unclaimed</span>
+                                <Card.Text style={{marginTop: "0.5rem"}}>Project ended but fund not yet claimed by beneficiary</Card.Text>
                             </div>
                             <div className="col">
-                                <span className="badge bg-secondary">Closed</span>
-                                <Card.Text style={{marginTop: "0.5rem"}}>Project is closed and fund has been claimed</Card.Text>
+                                <span style={{fontStyle: "oblique"}} className="badge bg-secondary">Closed</span>
+                                <Card.Text style={{marginTop: "0.5rem"}}>Project ended and fund has been claimed</Card.Text>
                             </div>
                         </div>
                     </div>
