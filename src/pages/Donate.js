@@ -1,25 +1,14 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./donate.css";
 
 // Components
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import ProgressBar from 'react-bootstrap/ProgressBar'
+import {Card, Container} from "react-bootstrap";
+import Fundraisers from "../components/Fundraisers";
 
 const Donate = ({address, id, contract, name, description, currAmount, goalAmount, timeLeft}) =>{
-    const FunctionIntro = () => {
-        return (
-            <div className = "donate-intro">
-                <p>
-                    {name}
-                    <br/>
-                    {description}
-                    <br/>
-                </p>
-            </div>
-        )
-    }
-
     const Donate = async (e) => {
         e.preventDefault();
         console.log(e.target[0].value);
@@ -48,24 +37,26 @@ const Donate = ({address, id, contract, name, description, currAmount, goalAmoun
         return (
             <div className = "donate-box">
                 <DonateValPanel/>
-                <br/>
-                <ProgressBar animated now={((currAmount/(10**18))/goalAmount)*100} label={`${(currAmount/goalAmount)*100}%`}/>
-                <br/>
-                <Button onClick={OwnerTransfer}>{"Transfer Out (Project Owner)"}</Button>
+                <Button style={{marginTop: "1rem", backgroundColor: "black"}} onClick={OwnerTransfer}>{"Transfer Out (Project Beneficiary)"}</Button>
             </div>
         )
     }
 
     return (
         <div className = "donate-background">
-            <h1>Donation Page</h1>
-            <div className = "donate">
-                <FunctionIntro/>
-                <div className = "donate-vertLine">
-                    <p>&nbsp;<br/>&nbsp;<br/>&nbsp;<br/>&nbsp;<br/>&nbsp;<br/>&nbsp;</p>
+            <h1 style={{paddingTop: "10rem", paddingBottom: "3rem"}}>Donation Page</h1>
+            <Card.Body style={{width: "60%"}}>
+                <div className="container">
+                    <div className="row">
+                        <div className="col">
+                            <Fundraisers  i={id} contract={contract} address={address} havebutton={false}/>
+                        </div>
+                        <div className="col">
+                            <FunctionPanel/>
+                        </div>
+                    </div>
                 </div>
-                <FunctionPanel/>
-            </div>
+            </Card.Body>
         </div>
     )
 }
