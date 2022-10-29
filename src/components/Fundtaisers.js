@@ -28,6 +28,7 @@ const Fundraisers = ({i, contract, address}) => {
 
     const getProject = async () => { 
         const res = await contract.methods.getProjectDetails(i).call();
+        console.log(res);
         setCurrProject(res);
     }
 
@@ -55,7 +56,7 @@ const Fundraisers = ({i, contract, address}) => {
                 <Card.Subtitle className="mb-2 text-muted">{timeLeft} seconds left</Card.Subtitle>
                 <Card.Text>{description}</Card.Text>
                 <ProgressBar style={{marginBottom: "20px"}}/>
-                <Card.Subtitle className="mb-2 text-muted">{currAmount}/{goalAmount}</Card.Subtitle>
+                <Card.Subtitle className="mb-2 text-muted">{currAmount/(10**18)}/{goalAmount/(10**18)}</Card.Subtitle>
                 <Button variant="primary" onClick={FundMePage}>Fund Me</Button>
             </Card.Body>
         </Card>}
