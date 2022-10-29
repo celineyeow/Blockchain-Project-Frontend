@@ -1,10 +1,5 @@
-export const CONTRACT_ADDRESS = "0x6e0B3949258162166be84B8091a39f1Dd33dE370"
+export const CONTRACT_ADDRESS = "0x3133298343C0793C0a1bC7c10def094Fc81fAAB8"
 export const CONTRACT_ABI = [
-	{
-		"inputs": [],
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	},
 	{
 		"inputs": [
 			{
@@ -34,13 +29,7 @@ export const CONTRACT_ABI = [
 			}
 		],
 		"name": "createNewProject",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
+		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
@@ -56,6 +45,24 @@ export const CONTRACT_ABI = [
 		"outputs": [],
 		"stateMutability": "payable",
 		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "transferOut",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
 	},
 	{
 		"inputs": [],
@@ -128,20 +135,7 @@ export const CONTRACT_ABI = [
 				"type": "tuple"
 			}
 		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_id",
-				"type": "uint256"
-			}
-		],
-		"name": "transferOut",
-		"outputs": [],
-		"stateMutability": "nonpayable",
+		"stateMutability": "view",
 		"type": "function"
 	}
 ]

@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect, useState } from 'react';
+
 import { ProgressBar } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
@@ -17,6 +18,7 @@ const Fundraisers = ({i, contract, address}) => {
     const [goalAmount, setGoalAmount] = useState(0);
     const [timeLeft, setTimeLeft] = useState(0);
     const [modalIsOpen, setIsOpen] = useState(false);
+    const [claimed, setClaimed] = useState(false);
 
     const closeModal = () => {
         setIsOpen(false);
@@ -44,22 +46,36 @@ const Fundraisers = ({i, contract, address}) => {
             setCurrAmount(currProject.currentAmt);
             setGoalAmount(currProject.goalAmt);
             setTimeLeft(currProject.timeLeft);
+            setClaimed(currProject.claimed);
         }
     }, [currProject]);
 
   return (
     <div>
         {currProject ===  null ? null :
-        <Card style={{backgroundColor: "#384455"}}>
-            <Card.Body>
-                <Card.Title>{name}</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">{timeLeft} seconds left</Card.Subtitle>
-                <Card.Text>{description}</Card.Text>
-                <ProgressBar style={{marginBottom: "20px"}}/>
-                <Card.Subtitle className="mb-2 text-muted">{currAmount/(10**18)}/{goalAmount/(10**18)}</Card.Subtitle>
-                <Button variant="primary" onClick={FundMePage}>Fund Me</Button>
-            </Card.Body>
-        </Card>}
+            claimed ? 
+                <Card style={{backgroundColor: "#384455"}}>
+                    <Card.Body>
+                        <Card.Title>{name+" (Project Claimed!)"}</Card.Title>
+                        <Card.Subtitle className="mb-2 text-muted">Project over</Card.Subtitle>
+                        <Card.Text>{description}</Card.Text>
+                        <ProgressBar animated style={{marginBottom: "20px"}} now={((currAmount/(10**18))/goalAmount)*100} label={`${(currAmount/goalAmount)*100}%`}/>
+                        <Card.Subtitle className="mb-2 text-muted">{currAmount/(10**18)}/{goalAmount/(10**0)}</Card.Subtitle>
+                        <Button variant="primary" onClick={FundMePage}>View Details</Button>
+                    </Card.Body>
+                </Card>
+            :
+                <Card style={{backgroundColor: "#384455"}}>
+                    <Card.Body>
+                        <Card.Title>{name}</Card.Title>
+                        <Card.Subtitle className="mb-2 text-muted">{timeLeft} seconds left</Card.Subtitle>
+                        <Card.Text>{description}</Card.Text>
+                        <ProgressBar animated style={{marginBottom: "20px"}} now={((currAmount/(10**18))/goalAmount)*100} label={`${(currAmount/goalAmount)*100}%`}/>
+                        <Card.Subtitle className="mb-2 text-muted">{currAmount/(10**18)}/{goalAmount/(10**0)}</Card.Subtitle>
+                        <Button variant="primary" onClick={FundMePage}>Fund Me</Button>
+                    </Card.Body>
+                </Card>
+        }
 
         <Modal
             isOpen={modalIsOpen}

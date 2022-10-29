@@ -1,17 +1,12 @@
 import { useState } from "react";
-
 import "./donate.css";
-
-// Custom Components
-import ProgressBar from "../components/ProgressBar";
 
 // Components
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import ProgressBar from 'react-bootstrap/ProgressBar'
 
 const Donate = ({address, id, contract, name, description, currAmount, goalAmount, timeLeft}) =>{
-    const [completed, setCompleted] = useState(100, 100);
-
     const FunctionIntro = () => {
         return (
             <div className = "donate-intro">
@@ -20,7 +15,6 @@ const Donate = ({address, id, contract, name, description, currAmount, goalAmoun
                     <br/>
                     {description}
                     <br/>
-                    Progress Bar
                 </p>
             </div>
         )
@@ -55,7 +49,7 @@ const Donate = ({address, id, contract, name, description, currAmount, goalAmoun
             <div className = "donate-box">
                 <DonateValPanel/>
                 <br/>
-                <ProgressBar bgcolor={"#6a1b9a"} completed={completed} />
+                <ProgressBar animated now={((currAmount/(10**18))/goalAmount)*100} label={`${(currAmount/goalAmount)*100}%`}/>
                 <br/>
                 <Button onClick={OwnerTransfer}>{"Transfer Out (Project Owner)"}</Button>
             </div>
