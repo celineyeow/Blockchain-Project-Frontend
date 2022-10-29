@@ -36,7 +36,7 @@ const Donate = ({address, id, contract, name, description, currAmount, goalAmoun
     const FunctionPanel = () => {
         return (
             <div className = "donate-box">
-                <DonateValPanel/>
+                {timeLeft < 1 ? null : <DonateValPanel/>}
                 <Button style={{marginTop: "1rem", backgroundColor: "black"}} onClick={OwnerTransfer}>{"Transfer Out (Project Beneficiary)"}</Button>
             </div>
         )
