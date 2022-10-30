@@ -105,6 +105,7 @@ const Fundraisers = ({i, contract, address, havebutton}) => {
             onRequestClose={closeModal}
             ariaHideApp={false}
             contentLabel="Example Modal"
+            size="sm"
         >
             <Donate
                 address={address}
