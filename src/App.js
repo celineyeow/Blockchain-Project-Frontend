@@ -4,9 +4,7 @@ import { useState } from "react";
 import {ethers} from 'ethers';
 
 // Paths
-import Home from './pages/Home.js'
-import Donate from "./pages/Donate.js";
-import NotFound from "./pages/NotFound.js";
+import Home from './pages/Home.js';
 
 // Web3
 import Web3 from 'web3';
@@ -45,7 +43,6 @@ const App = () => {
             let balanceVal = await provider.getBalance(accounts[0]);
             let bal = ethers.utils.formatEther(balanceVal);
 
-            console.log(chainId);
             if (chainId === '0x3'){
                 setNetwork('Ropsten Test Network');
             }

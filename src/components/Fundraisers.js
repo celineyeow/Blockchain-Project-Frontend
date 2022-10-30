@@ -31,7 +31,6 @@ const Fundraisers = ({i, contract, address, havebutton}) => {
 
     const getProject = async () => { 
         const res = await contract.methods.getProjectDetails(i).call();
-        console.log(res);
         setCurrProject(res);
     }
 

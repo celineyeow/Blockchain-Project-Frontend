@@ -8,11 +8,15 @@ import Fundraisers from '../components/Fundraisers';
 import Modal from 'react-modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import {Card, ProgressBar} from "react-bootstrap";
+import {Card, Alert} from "react-bootstrap";
 
 const Home = ({connectWallet, haveMetamask, isConnected, address, networkType, balance, contract}) => {
     const [modalIsOpen, setIsOpen] = useState(false);
     const [projectLen, setProjectLen] = useState(0);
+    const [formError, setFromError] = useState("");
+    const [showFail, setShowFail] = useState(false);
+    const [showSuccess, setShowSuccess] = useState(false);
+    const [showLoading, setShowLoading] = useState(false);
 
     useEffect(() => {
         if(haveMetamask && !isConnected){
@@ -38,10 +42,26 @@ const Home = ({connectWallet, haveMetamask, isConnected, address, networkType, b
     }
 
     const createProject = async (e)=> {
-        e.preventDefault();
-        await contract.methods.createNewProject(e.target[0].value, e.target[1].value, e.target[2].value,
-            e.target[3].value, e.target[4].value).send({from: address});
-        console.log("Project Created");
+        setShowFail(false);
+        setShowSuccess(false);
+        setShowLoading(true);
+        try{
+            e.preventDefault();
+            await contract.methods.createNewProject(e.target[0].value, e.target[1].value, e.target[2].value,
+                e.target[3].value, e.target[4].value).send({from: address});
+            setShowSuccess(true);
+            
+            setTimeout(function() {
+                setIsOpen(false);
+              }, 4000);
+        }
+        catch(err){
+            setFromError(err);
+            setShowFail(true);
+        }
+        setShowLoading(false);
+        setShowFail(false);
+        setShowSuccess(false);
     }
 
     return (
@@ -78,10 +98,21 @@ const Home = ({connectWallet, haveMetamask, isConnected, address, networkType, b
                 contentLabel="Example Modal"
                 size="lg"
             >
-                <Form onSubmit={createProject} style={{backgroundColor: "#384455", color: "#ffffff", padding: "40px", height: "100%"}}  >
+                <Alert variant={'danger'}  show={showFail}>
+                    Error: {formError.message}
+                </Alert>
+                
+                <Alert variant={'success'}  show={showSuccess}>
+                    Project Created
+                </Alert>
+
+                <Alert variant={'secondary'}  show={showLoading}>
+                    Loading...
+                </Alert>
+                <Form onSubmit={createProject} style={{backgroundColor: "#384455", color: "#ffffff", padding: "40px", height: "100%"}}>
                     <Form.Group className="mb-3" controlId="formBasicName">
                         <Form.Label>Project Name</Form.Label>
-                        <Form.Control placeholder="Enter project name" style={{border: "1px solid white", color: "white", backgroundColor: "#384455"}}/>
+                        <Form.Control required placeholder="Enter project name" style={{border: "1px solid white", color: "white", backgroundColor: "#384455"}} />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicDesc">

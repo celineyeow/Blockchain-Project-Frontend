@@ -44,7 +44,7 @@ const Donate = ({address, id, contract, name, description, currAmount, goalAmoun
 
     return (
         <div className = "donate-background">
-            <h1 style={{paddingTop: "10rem", paddingBottom: "3rem"}}>Donate Now</h1>
+            <h1 style={{paddingTop: "10rem"}}>Donation Page</h1>
             <Card.Body style={{width: "60%"}}>
                 <div className="container">
                     <div className="row">
