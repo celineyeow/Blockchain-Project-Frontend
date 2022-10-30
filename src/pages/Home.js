@@ -90,12 +90,13 @@ const Home = ({connectWallet, haveMetamask, isConnected, address, networkType, b
                     )
                 })}
             </div>
-
+            <div style={{backgroundColor: "#384455"}}>   
             <Modal
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
                 ariaHideApp={false}
                 contentLabel="Example Modal"
+                size="lg"
             >
                 <Alert variant={'danger'}  show={showFail}>
                     Error: {formError.message}
@@ -108,30 +109,30 @@ const Home = ({connectWallet, haveMetamask, isConnected, address, networkType, b
                 <Alert variant={'secondary'}  show={showLoading}>
                     Loading...
                 </Alert>
-                <Form onSubmit={createProject}>
+                <Form onSubmit={createProject} style={{backgroundColor: "#384455", color: "#ffffff", padding: "40px", height: "100%"}}>
                     <Form.Group className="mb-3" controlId="formBasicName">
                         <Form.Label>Project Name</Form.Label>
-                        <Form.Control required placeholder="Enter project name" />
+                        <Form.Control required placeholder="Enter project name" style={{border: "1px solid white", color: "white", backgroundColor: "#384455"}} />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicDesc">
                         <Form.Label>Description</Form.Label>
-                        <Form.Control required as="textarea" placeholder="Enter description" />
+                        <Form.Control as="textarea" placeholder="Enter description" style={{border: "1px solid white", color: "white", backgroundColor: "#384455"}}/>
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicBene">
                         <Form.Label>Beneficiary</Form.Label>
-                        <Form.Control required placeholder="Enter wallet address" />
+                        <Form.Control placeholder="Enter wallet address" style={{border: "1px solid white", color: "white", backgroundColor: "#384455"}}/>
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicGoal">
                         <Form.Label>Goal Amount</Form.Label>
-                        <Form.Control required placeholder="Enter goal in Ether" />
+                        <Form.Control placeholder="Enter goal in Ether" style={{border: "1px solid white", color: "white", backgroundColor: "#384455"}}/>
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicDur">
                         <Form.Label>Duration</Form.Label>
-                        <Form.Control required placeholder="Enter duration in seconds" />
+                        <Form.Control placeholder="Enter duration in seconds" style={{border: "1px solid white", color: "white", backgroundColor: "#384455"}}/>
                     </Form.Group>
 
                     <Button variant="primary" type="submit">
@@ -139,7 +140,8 @@ const Home = ({connectWallet, haveMetamask, isConnected, address, networkType, b
                     </Button>
                 </Form>
             </Modal>
-            <Card style={{backgroundColor: "#384465", marginTop: "3rem", marginBottom: "1rem"}}>
+            </div> 
+            <Card style={{backgroundColor: "#384455", marginTop: "3rem", marginBottom: "1rem"}}>
                 <div className="card-header">
                     Status Legend
                 </div>
