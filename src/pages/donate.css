@@ -1,7 +1,7 @@
 .donate-background{
     text-align: center;
     background-color: #060f1e;
-    min-height: 100vh;
+    min-height: 100%;
     flex-direction: column;
     display: flex;
     align-items: center;
