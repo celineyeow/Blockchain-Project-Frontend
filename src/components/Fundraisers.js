@@ -114,7 +114,7 @@ const Fundraisers = ({i, contract, address, havebutton, radioValue}) => {
                         <Card.Body>
                             <Card.Subtitle className="mb-2 text-muted">{getTime()}</Card.Subtitle>
                             <Card.Text>{description}</Card.Text>
-                            <ProgressBar animated style={{marginBottom: "20px"}} now={((currAmount/(10**18))/goalAmount)*100} label={`${(currAmount/goalAmount)*100}%`}/>
+                            <ProgressBar animated style={{marginBottom: "20px"}} now={(((currAmount/(10**18)))/(goalAmount/(10**18)))*100} label={`${(currAmount/goalAmount)*100}%`}/>
                             <Card.Subtitle className="mb-2 text-info">{currAmount/(10**18)} / {goalAmount/(10**18)} Ether Raised</Card.Subtitle>
                             {button()}
                         </Card.Body>
