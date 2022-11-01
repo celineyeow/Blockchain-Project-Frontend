@@ -9,6 +9,8 @@ import Modal from 'react-modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {Card, Alert} from "react-bootstrap";
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import ToggleButton from 'react-bootstrap/ToggleButton';
 
 const Home = ({connectWallet, haveMetamask, isConnected, address, networkType, balance, contract}) => {
     const [modalIsOpen, setIsOpen] = useState(false);
@@ -17,6 +19,14 @@ const Home = ({connectWallet, haveMetamask, isConnected, address, networkType, b
     const [showFail, setShowFail] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
     const [showLoading, setShowLoading] = useState(false);
+    const [radioValue, setRadioValue] = useState('1');
+
+    const radios = [
+        { name: 'Show All', value: '0', variant: 'light'},
+        { name: 'Active', value: '1', variant: 'success' },
+        { name: 'Unclaimed', value: '2', variant: 'warning' },
+        { name: 'Closed', value: '3', variant: 'secondary' },
+    ];
 
     useEffect(() => {
         if(haveMetamask && !isConnected){
@@ -61,6 +71,7 @@ const Home = ({connectWallet, haveMetamask, isConnected, address, networkType, b
         }
         setShowLoading(false);
         setShowFail(false);
+     
         setShowSuccess(false);
     }
 
@@ -79,19 +90,34 @@ const Home = ({connectWallet, haveMetamask, isConnected, address, networkType, b
 
             <h1 style={{paddingTop: "3rem"}}>Fundraiser</h1>
 
-            <p>{parseInt(projectLen)+1} Projects</p>
+            {modalIsOpen === true ? null :
+            <ButtonGroup style={{zIndex: 0}}>
+                {radios.map((radio, idx) => (
+                <ToggleButton
+                    key={idx}
+                    id={`radio-${idx}`}
+                    type="radio"
+                    variant={radio.variant}
+                    name="radio"
+                    value={radio.value}
+                    checked={radioValue === radio.value}
+                    onChange={(e) => setRadioValue(e.currentTarget.value)}
+                >
+                    {radio.name}
+                </ToggleButton>
+                ))}
+            </ButtonGroup>}
 
-            <div style={{display: "flex", gap: "20px", textAlign: "left", flexWrap: "wrap"}}>
+            <div style={{display: "flex", gap: "20px", textAlign: "left", flexWrap: "wrap", marginTop: "15px"}}>
                 {[...Array(parseInt(projectLen)+1)].map((_, i) => {
                     return(
-                        <div style={{width: "32%"}} key={i}>
-                            <Fundraisers  i={i} contract={contract} address={address} havebutton={true}/>
-                        </div>
+                         <Fundraisers key={i} i={i} contract={contract} address={address} havebutton={true} radioValue={radioValue}/>
                     )
                 })}
             </div>
             <div style={{backgroundColor: "#384455"}}>   
             <Modal
+                className="FrontModal"
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
                 ariaHideApp={false}

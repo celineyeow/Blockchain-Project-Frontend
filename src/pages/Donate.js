@@ -49,7 +49,7 @@ const Donate = ({address, id, contract, name, description, currAmount, goalAmoun
                 <div className="container">
                     <div className="row">
                         <div className="col">
-                            <Fundraisers  i={id} contract={contract} address={address} havebutton={false}/>
+                            <Fundraisers  i={id} contract={contract} address={address} havebutton={false} radioValue='0'/>
                         </div>
                         <div className="col">
                             <FunctionPanel/>

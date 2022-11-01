@@ -9,7 +9,7 @@ import Modal from 'react-modal';
 //import './fundraisers.css';
 
 
-const Fundraisers = ({i, contract, address, havebutton}) => {
+const Fundraisers = ({i, contract, address, havebutton, radioValue}) => {
     const [currProject, setCurrProject] = useState(null);
 
     //Project Details
@@ -39,6 +39,23 @@ const Fundraisers = ({i, contract, address, havebutton}) => {
             return (<Button variant="primary" onClick={FundMePage}>{timeLeft < 1 ? "View Details" : "Fund Me"}</Button>);
         }
         return null;
+    }
+
+    const showCard = () => {
+        if(radioValue === '0'){
+            return true;
+        }
+        return cardState() === radioValue;
+    }
+
+    const cardState = () => {
+        if (timeLeft < 1) {
+            if (claimed) {
+                return '3';
+            }
+            return '2';
+        }
+        return '1';
     }
 
     const status = () => {
@@ -82,8 +99,48 @@ const Fundraisers = ({i, contract, address, havebutton}) => {
     }, [currProject]);
 
   return (
-    <div>
-        {currProject ===  null ? null :
+    <>
+    {showCard() ? 
+        havebutton === true ?
+            <div  style={{width: "32%"}}>
+                {currProject ===  null ? null :
+                    <Card style={{backgroundColor: "#384455"}}>
+                        <div style={{fontSize: "large", fontStyle: "oblique"}} className="card-header">
+                            {name}
+                            {status()}
+                        </div>
+                        <Card.Body>
+                            <Card.Subtitle className="mb-2 text-muted">{getTime()}</Card.Subtitle>
+                            <Card.Text>{description}</Card.Text>
+                            <ProgressBar animated style={{marginBottom: "20px"}} now={((currAmount/(10**18))/goalAmount)*100} label={`${(currAmount/goalAmount)*100}%`}/>
+                            <Card.Subtitle className="mb-2 text-info">{currAmount/(10**18)} / {goalAmount/(10**18)} Ether Raised</Card.Subtitle>
+                            {button()}
+                        </Card.Body>
+                    </Card>
+                }
+
+                <Modal
+                    isOpen={modalIsOpen}
+                    onRequestClose={closeModal}
+                    ariaHideApp={false}
+                    contentLabel="Example Modal"
+                    size="sm"
+                    style={{zIndex: 9999, position: "fixed"}}
+                >
+                    <Donate
+                        address={address}
+                        id={i}
+                        name={name}
+                        description={description}
+                        currAmount={currAmount}
+                        goalAmount={goalAmount}
+                        timeLeft={timeLeft}
+                        contract={contract}
+                    />
+                </Modal>
+            </div>
+            :
+            currProject ===  null ? null :
             <Card style={{backgroundColor: "#384455"}}>
                 <div style={{fontSize: "large", fontStyle: "oblique"}} className="card-header">
                     {name}
@@ -97,28 +154,9 @@ const Fundraisers = ({i, contract, address, havebutton}) => {
                     {button()}
                 </Card.Body>
             </Card>
-        }
-
-        <Modal
-            isOpen={modalIsOpen}
-            onRequestClose={closeModal}
-            ariaHideApp={false}
-            contentLabel="Example Modal"
-            size="sm"
-        >
-            <Donate
-                address={address}
-                id={i}
-                name={name}
-                description={description}
-                currAmount={currAmount}
-                goalAmount={goalAmount}
-                timeLeft={timeLeft}
-                contract={contract}
-            />
-        </Modal>
-    </div>
-    
+        :null
+    }
+    </>
 );
 }
 
