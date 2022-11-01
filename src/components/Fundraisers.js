@@ -20,6 +20,7 @@ const Fundraisers = ({i, contract, address, havebutton, radioValue}) => {
     const [timeLeft, setTimeLeft] = useState(0);
     const [modalIsOpen, setIsOpen] = useState(false);
     const [claimed, setClaimed] = useState(false);
+    const [beneficiary, setBenficairy] = useState("");
 
     const closeModal = () => {
         setIsOpen(false);
@@ -95,6 +96,7 @@ const Fundraisers = ({i, contract, address, havebutton, radioValue}) => {
             setGoalAmount(currProject.goalAmt);
             setTimeLeft(currProject.timeLeft);
             setClaimed(currProject.claimed);
+            setBenficairy(currProject.beneficiary);
         }
     }, [currProject]);
 
@@ -130,12 +132,10 @@ const Fundraisers = ({i, contract, address, havebutton, radioValue}) => {
                     <Donate
                         address={address}
                         id={i}
-                        name={name}
-                        description={description}
-                        currAmount={currAmount}
-                        goalAmount={goalAmount}
                         timeLeft={timeLeft}
                         contract={contract}
+                        beneficiary={beneficiary}
+                        claimed={claimed}
                     />
                 </Modal>
             </div>

@@ -1,14 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import "./donate.css";
 
 // Components
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import ProgressBar from 'react-bootstrap/ProgressBar'
-import {Card, Container} from "react-bootstrap";
+import {Card} from "react-bootstrap";
 import Fundraisers from "../components/Fundraisers";
 
-const Donate = ({address, id, contract, name, description, currAmount, goalAmount, timeLeft}) =>{
+const Donate = ({address, id, contract, timeLeft, beneficiary, claimed}) =>{
     const Donate = async (e) => {
         e.preventDefault();
         console.log(e.target[0].value);
@@ -33,11 +32,25 @@ const Donate = ({address, id, contract, name, description, currAmount, goalAmoun
         )
     }
 
+    const cardState = () => {
+        if (timeLeft < 1) {
+            if (claimed) {
+                return '3';
+            }
+            return '2';
+        }
+        return '1';
+    }
+
     const FunctionPanel = () => {
         return (
             <div className = "donate-box">
                 {timeLeft < 1 ? null : <DonateValPanel/>}
-                <Button style={{marginTop: "1rem", backgroundColor: "#060f1e"}} onClick={OwnerTransfer}>{"Transfer Out (Project Beneficiary)"}</Button>
+                {cardState() === '2'?
+                <Button style={{marginTop: "1rem", backgroundColor: "#060f1e"}} onClick={OwnerTransfer}>{"Transfer Out (Project Beneficiary Only)"}</Button>
+                :null}
+                <p style={{fontSize: "18px", paddingBottom: "0px", marginBottom: "0px", marginTop: "10px"}}>Beneficiary: </p>
+                <a href={"https://goerli.etherscan.io/address/"+beneficiary}  target="_blank" style={{fontSize: "18px"}}>{beneficiary}</a>
             </div>
         )
     }

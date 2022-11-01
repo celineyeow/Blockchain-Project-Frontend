@@ -90,7 +90,6 @@ const Home = ({connectWallet, haveMetamask, isConnected, address, networkType, b
 
             <h1 style={{paddingTop: "3rem"}}>Fundraiser</h1>
 
-            {modalIsOpen === true ? null :
             <ButtonGroup style={{zIndex: 0}}>
                 {radios.map((radio, idx) => (
                 <ToggleButton
@@ -106,7 +105,7 @@ const Home = ({connectWallet, haveMetamask, isConnected, address, networkType, b
                     {radio.name}
                 </ToggleButton>
                 ))}
-            </ButtonGroup>}
+            </ButtonGroup>
 
             <div style={{display: "flex", gap: "20px", textAlign: "left", flexWrap: "wrap", marginTop: "15px"}}>
                 {[...Array(parseInt(projectLen)+1)].map((_, i) => {
