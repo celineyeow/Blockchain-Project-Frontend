@@ -1,17 +1,33 @@
-import React from "react";
+import React, { useState } from 'react';
 import "./donate.css";
 
 // Components
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import {Card} from "react-bootstrap";
+import {Card, Alert} from "react-bootstrap";
 import Fundraisers from "../components/Fundraisers";
 
 const Donate = ({address, id, contract, timeLeft, beneficiary, claimed}) =>{
+    const [showFail, setShowFail] = useState(false);
+    const [showSuccess, setShowSuccess] = useState(false);
+    const [showLoading, setShowLoading] = useState(false);
+    const [formError, setFromError] = useState("");
+
     const Donate = async (e) => {
+        setShowFail(false);
+        setShowSuccess(false);
+        setShowLoading(true);
         e.preventDefault();
-        console.log(e.target[0].value);
-        await contract.methods.donate(id).send({from: address, value: e.target[0].value*10**18});
+        try{
+            await contract.methods.donate(id).send({from: address, value: e.target[0].value*10**18});
+            setShowSuccess(true);
+            setShowLoading(false);
+        }
+        catch(err){
+            setFromError(err);
+            setShowFail(true);
+            setShowLoading(false);
+        }
     }
 
     const OwnerTransfer = async () => {
@@ -57,6 +73,19 @@ const Donate = ({address, id, contract, timeLeft, beneficiary, claimed}) =>{
 
     return (
         <div className = "donate-background">
+            <div style={{marginTop: "15px"}}>
+                <Alert variant={'danger'}  show={showFail}>
+                    Error: {formError.message}
+                </Alert>
+                
+                <Alert variant={'success'}  show={showSuccess}>
+                    Donation Sent Successfully
+                </Alert>
+
+                <Alert variant={'secondary'}  show={showLoading}>
+                    Loading...
+                </Alert>
+            </div>
             <h1 style={{paddingTop: "10rem"}}>Donation Page</h1>
             <Card.Body style={{width: "60%"}}>
                 <div className="container">

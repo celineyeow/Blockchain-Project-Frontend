@@ -45,6 +45,9 @@ const Home = ({connectWallet, haveMetamask, isConnected, address, networkType, b
 
     const StartFund = () => {
         setIsOpen(true);
+        setShowFail(false);
+        setShowLoading(false);
+        setShowLoading(false);
     }
 
     const closeModal = () => {
@@ -60,19 +63,18 @@ const Home = ({connectWallet, haveMetamask, isConnected, address, networkType, b
             await contract.methods.createNewProject(e.target[0].value, e.target[1].value, e.target[2].value,
                 e.target[3].value, e.target[4].value).send({from: address});
             setShowSuccess(true);
-            
+            setShowLoading(false);
+
             setTimeout(function() {
                 setIsOpen(false);
+                setShowSuccess(false);
               }, 4000);
         }
         catch(err){
             setFromError(err);
             setShowFail(true);
+            setShowLoading(false);
         }
-        setShowLoading(false);
-        setShowFail(false);
-     
-        setShowSuccess(false);
     }
 
     return (
