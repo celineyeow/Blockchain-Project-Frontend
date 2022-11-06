@@ -153,7 +153,7 @@ const Home = ({connectWallet, haveMetamask, isConnected, address, networkType, b
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicGoal">
-                        <Form.Label>Goal Amount</Form.Label>
+                        <Form.Label>Goal Amount (Minimum: 1 ETH)</Form.Label>
                         <Form.Control required placeholder="Enter goal in Ether" style={{border: "1px solid white", color: "white", backgroundColor: "#384455"}}/>
                     </Form.Group>
 
