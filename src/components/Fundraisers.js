@@ -98,14 +98,15 @@ const Fundraisers = ({i, contract, address, havebutton, radioValue}) => {
             setClaimed(currProject.claimed);
             setBenficairy(currProject.beneficiary);
         }
+        console.log(currProject);
     }, [currProject]);
 
   return (
     <>
     {showCard() ? 
+    currProject !==  null ?
         havebutton === true ?
             <div  style={{width: "32%"}}>
-                {currProject ===  null ? null :
                     <Card style={{backgroundColor: "#384455"}}>
                         <div style={{fontSize: "large", fontStyle: "oblique"}} className="card-header">
                             {name}
@@ -119,7 +120,6 @@ const Fundraisers = ({i, contract, address, havebutton, radioValue}) => {
                             {button()}
                         </Card.Body>
                     </Card>
-                }
 
                 <Modal
                     isOpen={modalIsOpen}
@@ -154,7 +154,7 @@ const Fundraisers = ({i, contract, address, havebutton, radioValue}) => {
                     {button()}
                 </Card.Body>
             </Card>
-        :null
+        :null:null
     }
     </>
 );
