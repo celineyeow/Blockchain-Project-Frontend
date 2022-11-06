@@ -144,22 +144,22 @@ const Home = ({connectWallet, haveMetamask, isConnected, address, networkType, b
 
                     <Form.Group className="mb-3" controlId="formBasicDesc">
                         <Form.Label>Description</Form.Label>
-                        <Form.Control as="textarea" placeholder="Enter description" style={{border: "1px solid white", color: "white", backgroundColor: "#384455"}}/>
+                        <Form.Control required as="textarea" placeholder="Enter description" style={{border: "1px solid white", color: "white", backgroundColor: "#384455"}}/>
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicBene">
                         <Form.Label>Beneficiary</Form.Label>
-                        <Form.Control placeholder="Enter wallet address" style={{border: "1px solid white", color: "white", backgroundColor: "#384455"}}/>
+                        <Form.Control required placeholder="Enter wallet address" style={{border: "1px solid white", color: "white", backgroundColor: "#384455"}}/>
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicGoal">
                         <Form.Label>Goal Amount</Form.Label>
-                        <Form.Control placeholder="Enter goal in Ether" style={{border: "1px solid white", color: "white", backgroundColor: "#384455"}}/>
+                        <Form.Control required placeholder="Enter goal in Ether" style={{border: "1px solid white", color: "white", backgroundColor: "#384455"}}/>
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicDur">
                         <Form.Label>Duration</Form.Label>
-                        <Form.Control placeholder="Enter duration in seconds" style={{border: "1px solid white", color: "white", backgroundColor: "#384455"}}/>
+                        <Form.Control required placeholder="Enter duration in seconds" style={{border: "1px solid white", color: "white", backgroundColor: "#384455"}}/>
                     </Form.Group>
 
                     <Button variant="primary" type="submit">
