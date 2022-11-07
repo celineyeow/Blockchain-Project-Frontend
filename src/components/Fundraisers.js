@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from 'react';
 
-import {Container, ProgressBar} from "react-bootstrap";
+import { ProgressBar} from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Donate from '../pages/Donate.js';
@@ -149,8 +149,8 @@ const Fundraisers = ({i, contract, address, havebutton, radioValue}) => {
                 <Card.Body>
                     <Card.Subtitle className="mb-2 text-muted">{getTime()}</Card.Subtitle>
                     <Card.Text>{description}</Card.Text>
-                    <ProgressBar animated style={{marginBottom: "20px"}} now={((currAmount/(10**18))/goalAmount)*100} label={`${(currAmount/goalAmount)*100}%`}/>
-                    <Card.Subtitle className="mb-2 text-info">{currAmount/(10**18)} / {goalAmount/(10**18)} Ether Raised</Card.Subtitle>
+                    <ProgressBar animated style={{marginBottom: "20px"}} now={(((currAmount/(10**18)))/(goalAmount/(10**18)))*100} label={`${(currAmount/goalAmount)*100}%`}/>
+                            <Card.Subtitle className="mb-2 text-info">{currAmount/(10**18)} / {goalAmount/(10**18)} Ether Raised</Card.Subtitle>
                     {button()}
                 </Card.Body>
             </Card>
